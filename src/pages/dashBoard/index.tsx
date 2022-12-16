@@ -36,7 +36,7 @@ export const DashBoard = () => {
               <div>
                 <h3>{elem.name}</h3>
                 <span>{elem.category}</span>     
-                <span>{elem.price.toFixed(2)}</span>
+                <span>R$: {elem.price.toFixed(2)}</span>
                 <Buttons type="button">Adicionar</Buttons>      
               </div>
           </li>)}
