@@ -22,6 +22,7 @@ export interface iUserRegister{
 export interface iButtonsProps{
     type: "submit" | "button" | undefined,
     children: React.ReactNode,
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export interface iInputsProps{

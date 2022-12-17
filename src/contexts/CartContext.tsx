@@ -1,19 +1,30 @@
-import { createContext, useContext, useState,} from "react";
-import { iChildren } from "../interface";
-import { UserContext } from "./UserContext";
+import { createContext, useState } from "react";
+import { iChildren, iProducts } from "../interface";
 
-interface iCartContext{
-  teste:string,
-  setTeste:React.Dispatch<React.SetStateAction<string>>
+
+export interface iCartContext {
+  objectProduct: [] | iProducts[] 
+  setObjectProduct: React.Dispatch<React.SetStateAction<iProducts[]>>
+  handleProduct: (elem: iProducts) => void
 }
 
 export const CartContext = createContext<iCartContext>({} as iCartContext);
 
-export const CartProvider = ({ children }: iChildren) => {
 
-const [ teste , setTeste] = useState("")
+export const CartProvider = ({ children }: iChildren) => {
   
+  const [objectProduct, setObjectProduct] = useState<iProducts[]>([] as iProducts[]);
+  
+  const handleProduct = (elem: iProducts) => {
+    setObjectProduct([elem ,...objectProduct])
+  };
+
+
   return (
-    <CartContext.Provider value={{teste,setTeste}}>{children}</CartContext.Provider>
+    <CartContext.Provider
+      value={{ objectProduct, setObjectProduct , handleProduct }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 };

@@ -57,6 +57,7 @@ export const Header = styled.header`
         width: 40px;
         color: var(--color-white);
         border-radius: 4px;
+        cursor: pointer;
       }
 
       img {
@@ -64,6 +65,9 @@ export const Header = styled.header`
         height: 20px;
         cursor: pointer;
       }
+    }
+    img{
+        cursor: pointer;
     }
   }
 
