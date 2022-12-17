@@ -12,7 +12,7 @@ interface iClick{
 
 export const Modal = ({id = "modal", onClose}:iClick) =>{
 
-    const { objectProduct }= useContext(CartContext)
+    const { objectProduct,total,removeAll,removeProduct }= useContext(CartContext)
     
     return(
         <DivModal>
@@ -41,16 +41,16 @@ export const Modal = ({id = "modal", onClose}:iClick) =>{
                                             <button>+</button>
                                         </div>
                                     </div>
-                                    <img className="trash" src={trash} alt="Excluir" />
+                                    <img onClick={()=> removeProduct(list.id)} className="trash" src={trash} alt="Excluir" />
                                 </div>
                             </li>
                         )
                     })}
                     <div className="value">
                         <span>Total</span>
-                        <span>R$: 500</span>
+                        <span>R$: {total.toFixed(2)}</span>
                     </div>
-                    <button>Remover todos</button>
+                    <Buttons onClick={()=> removeAll()} type="button">Remover todos</Buttons>
                     </UlItens>
                 )
                 }
