@@ -66,15 +66,36 @@ export const Header = styled.header`
         cursor: pointer;
       }
     }
-    img{
-        cursor: pointer;
+    img {
+      cursor: pointer;
+    }
+
+    section {
+      display: flex;
+      position: relative;
+      img {
+        position: relative;
+      }
+      span {
+        font-size: var(--font-size6);
+        color: var(--color-white);
+        display: flex;
+        position: absolute;
+        right: 1px;
+        width: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        background-color: var(--color-primary1);
+      }
     }
   }
 
   @media (min-width: 1024px) {
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 100px;
 
     & > div {
       h1 {

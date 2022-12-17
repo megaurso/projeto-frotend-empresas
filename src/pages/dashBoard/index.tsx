@@ -14,15 +14,24 @@ import { Link } from "react-router-dom";
 
 export const DashBoard = () => {
   const { products } = useContext(UserContext);
-  const { handleProduct } =useContext(CartContext);
+  const { handleProduct,counterCart } =useContext(CartContext);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [filterListCart, setFilterListCart] = useState([])
 
   const removeLocalStorage = ()=> {
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@USER");
   }
  
+  // const renderFilter(){
+  //   const foodName = products.filter(({name,category}:)=>
+  //     name.toLowerCase().includes(filterListCart) ||
+  //     category.toLowerCase().includes(filterListCart)
+  //   )
+
+  //   setFilterListCart(foodName)
+  // }
 
   return (
     <>
@@ -34,14 +43,17 @@ export const DashBoard = () => {
           </div>
           <div>
             <div>
-              <input type="text" placeholder="Digitar Pesquisa" />
+              <input /* onChange={() => renderFilter()}*/ type="text" placeholder="Digitar Pesquisa" />
               <img src={search} alt="Pesquisa" />
             </div>
-            <img
-              onClick={() => setModalVisible(true)}
-              src={cart}
-              alt="Carrinho de compras"
-            />
+            <section>
+              <img
+                onClick={() => setModalVisible(true)}
+                src={cart}
+                alt="Carrinho de compras"
+                />
+                <span>{counterCart}</span>
+            </section>
             <Link onClick={removeLocalStorage} to={"/"}><img src={exit} alt="Sair" /></Link>
             
           </div>
