@@ -9,9 +9,9 @@ export const RoutesMain = () => {
     <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        {/* <Route element={<ProtectedRoutes/>}> */}
+        <Route element={<ProtectedRoutes/>}>
           <Route path="/dashboard" element={<DashBoard/>}/>
-        {/* </Route> */}
+        </Route>
     </Routes>
   )
 }

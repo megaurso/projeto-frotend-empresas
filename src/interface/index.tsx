@@ -5,7 +5,7 @@ export interface iUserContextProps{
     myRegister: (data:iUserRegister)=> void
     myLogin: (data:iUserLogin)=> void
     usersOn?: string | undefined
-    products: any
+    products: iProducts[]
 }
 
 export interface iChildren{

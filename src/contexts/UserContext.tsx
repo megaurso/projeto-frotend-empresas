@@ -1,5 +1,5 @@
 import  { createContext, useEffect, useState } from 'react'
-import { iChildren, iUserContextProps, iUserLogin, iUserRegister } from '../interface'
+import { iChildren, iProducts, iUserContextProps, iUserLogin, iUserRegister } from '../interface'
 import { api } from '../services/api'
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,8 +8,8 @@ export const UserContext = createContext({} as iUserContextProps)
 
 
 export const UserProvider = ({children}: iChildren) => {
-  const [usersOn, setUsersOn] = useState()
-  const [products, setProducts] = useState<any>([]);
+  const [usersOn, setUsersOn] = useState<string | undefined>(localStorage.getItem("@TOKEN") || undefined)
+  const [products, setProducts] = useState<iProducts[]>([]);
 
   
   const navigate = useNavigate();

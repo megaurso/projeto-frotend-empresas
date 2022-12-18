@@ -6,7 +6,6 @@ import { DivDashBoard } from "./style";
 import { useContext, useState } from "react";
 import { Modal } from "../../components/modal";
 import { UserContext } from "../../contexts/UserContext";
-import { iProducts } from "../../interface";
 import { Buttons } from "../../components/buttons";
 import { CartContext } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
@@ -15,23 +14,22 @@ import { Link } from "react-router-dom";
 export const DashBoard = () => {
   const { products } = useContext(UserContext);
   const { handleProduct,counterCart } =useContext(CartContext);
-
+  
   const [modalVisible, setModalVisible] = useState(false);
-  const [filterListCart, setFilterListCart] = useState([])
+  const [inputValue,setInputValue] = useState("")
 
+  const filteredProducts = products.filter(({name,category})=>
+    name.toLowerCase().includes(inputValue) ||
+    category.toLowerCase().includes(inputValue)
+)
   const removeLocalStorage = ()=> {
     localStorage.removeItem("@TOKEN");
     localStorage.removeItem("@USER");
   }
- 
-  // const renderFilter(){
-  //   const foodName = products.filter(({name,category}:)=>
-  //     name.toLowerCase().includes(filterListCart) ||
-  //     category.toLowerCase().includes(filterListCart)
-  //   )
 
-  //   setFilterListCart(foodName)
-  // }
+   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setInputValue(e.target.value)
+  }
 
   return (
     <>
@@ -43,7 +41,7 @@ export const DashBoard = () => {
           </div>
           <div>
             <div>
-              <input /* onChange={() => renderFilter()}*/ type="text" placeholder="Digitar Pesquisa" />
+              <input value={inputValue} onChange={(e) => changeValue(e)}type="text" placeholder="Digitar Pesquisa" />
               <img src={search} alt="Pesquisa" />
             </div>
             <section>
@@ -60,7 +58,7 @@ export const DashBoard = () => {
         </Header>
         <div>
           <ul>
-            {products.map((elem: iProducts) => (
+            {filteredProducts.map((elem) => (
               <li key={elem.id}>
                 <img src={elem.img} alt={elem.name} />
                 <div>

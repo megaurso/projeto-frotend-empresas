@@ -2,15 +2,18 @@ import styled from "styled-components";
 
 export const DivModal = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 60%;
+  width: 100vw;
+  height: 100vh;
   flex-direction: column;
   padding: 10px;
+  padding-top: 80px;
+  background-color: rgba(51, 51, 51, 0.5);
+  z-index: 1;
 
   & > div {
     background-color: var(--color-gray4);
@@ -56,10 +59,6 @@ export const DivModal = styled.div`
     }
   }
   @media (min-width: 1024px) {
-    width: 100%;
-    height: 60%;
-    justify-content: center;
-    align-items: center;
     div {
       width: 25%;
       header {
