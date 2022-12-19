@@ -16,9 +16,8 @@ export const Modal = ({ id = "modal", onClose }: iClick) => {
     total,
     removeAll,
     removeProduct,
-    increase,
-    decrease,
-    counter,
+    handleProductRemove,
+    handleProduct
   } = useContext(CartContext);
 
   return (
@@ -45,11 +44,11 @@ export const Modal = ({ id = "modal", onClose }: iClick) => {
                     <div>
                       <h3>{list.name}</h3>
                       <div>
-                        <Buttons onClick={decrease} type="button">
+                        <Buttons onClick={()=>handleProductRemove(list)} type="button">
                           -
                         </Buttons>
-                        <span>{counter}</span>
-                        <Buttons onClick={increase} type="button">
+                        <span>{list.counter}</span>
+                        <Buttons onClick={()=>handleProduct(list)} type="button">
                           +
                         </Buttons>
                       </div>

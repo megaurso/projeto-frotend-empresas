@@ -6,12 +6,10 @@ export interface iCartContext {
   objectProduct: [] | iProducts[]
   setObjectProduct: React.Dispatch<React.SetStateAction<iProducts[]>>
   handleProduct: (elem: iProducts) => void
+  handleProductRemove: (elem: iProducts) => void
   total: number
   removeAll: () => void
   removeProduct: (item: number) => void
-  increase: () => void
-  decrease: () => void
-  counter: number
   counterCart:number
 }
 
@@ -21,7 +19,6 @@ export const CartProvider = ({ children }: iChildren) => {
   const [objectProduct, setObjectProduct] = useState<iProducts[]>(
     [] as iProducts[]
   );
-  const [counter, setCounter] = useState(1);
   const [counterCart, setCounterCart] = useState(0)
 
   const increaseCart = () =>{
@@ -36,25 +33,31 @@ export const CartProvider = ({ children }: iChildren) => {
     setCounterCart(counterCart - 1)
   }
 
-  const increase = () => {
-    setCounter(counter + 1);
-  };
-
-  const decrease = () => {
-    if (counter > 1) {
-      setCounter(counter - 1);
-    }
-  };
-
+  const total = objectProduct.reduce((acc, actual) => acc + (actual.price * actual.counter), 0);
+  
   const handleProduct = (elem: iProducts) => {
     const findItem = objectProduct.find((item) => item.id === elem.id);
     if (findItem) {
-      toast.error("Item ja existe no carrinho");
-      return;
-    }
+      const findIndex = objectProduct.findIndex((item) => item.id === elem.id);
+      const product = objectProduct.splice(findIndex,1)
+      product[0].counter += 1
+      setObjectProduct([product[0], ...objectProduct]);
+    }else{
+      increaseCart()
+      elem.counter = 1
+      setObjectProduct([elem, ...objectProduct]);
 
-    increaseCart()
-    setObjectProduct([elem, ...objectProduct]);
+    }
+  };
+
+  const handleProductRemove = (elem: iProducts) => {
+    const findItem = objectProduct.find((item) => item.id === elem.id);
+    if (findItem && elem.counter > 1) {
+      const findIndex = objectProduct.findIndex((item) => item.id === elem.id);
+      const product = objectProduct.splice(findIndex,1)
+      product[0].counter -= 1
+      setObjectProduct([product[0], ...objectProduct]);
+    }
   };
 
   const removeAll = () => {
@@ -70,7 +73,6 @@ export const CartProvider = ({ children }: iChildren) => {
     toast.success("Produto removido");
   };
 
-  const total = objectProduct.reduce((acc, actual) => acc + actual.price, 0);
 
   return (
     <CartContext.Provider
@@ -81,10 +83,8 @@ export const CartProvider = ({ children }: iChildren) => {
         total,
         removeAll,
         removeProduct,
-        increase,
-        decrease,
-        counter,
-        counterCart
+        counterCart,
+        handleProductRemove
       }}
     >
       {children}
