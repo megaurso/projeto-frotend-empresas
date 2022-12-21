@@ -2,8 +2,8 @@ import React from "react";
 import { UseFormRegister } from "react-hook-form"
 
 export interface iUserContextProps{
-    myRegister: (data:iUserRegister)=> void
-    myLogin: (data:iUserLogin)=> void
+    userRegister: (data:iUserRegister)=> void
+    createUserSession: (data:iUserLogin)=> void
     usersOn?: string | undefined
     products: iProducts[]
 }

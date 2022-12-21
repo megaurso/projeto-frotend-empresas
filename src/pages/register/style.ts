@@ -73,6 +73,15 @@ export const MainRegister = styled.main`
     }
   }
 
+  @media (min-width: 600px){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      form{
+        width: 500px;
+      }
+  }
+
   @media (min-width: 1024px){
     width: 100vw;
     height: 100vh;

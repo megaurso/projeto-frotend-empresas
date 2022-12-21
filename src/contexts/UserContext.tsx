@@ -1,6 +1,6 @@
-import  { createContext, useEffect, useState } from 'react'
-import { iChildren, iProducts, iUserContextProps, iUserLogin, iUserRegister } from '../interface'
-import { api } from '../services/api'
+import  { createContext, useEffect, useState } from "react"
+import { iChildren, iProducts, iUserContextProps, iUserLogin, iUserRegister } from "../interface"
+import { api } from "../services/api"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,7 @@ export const UserProvider = ({children}: iChildren) => {
   
   const navigate = useNavigate();
 
-  const myRegister = async (data: iUserRegister)=> {
+  const userRegister = async (data: iUserRegister)=> {
     delete data.confirmPassword
     try {
       await api.post("/users", data)
@@ -26,7 +26,7 @@ export const UserProvider = ({children}: iChildren) => {
     }
   }
 
-  const getApiProducts = async () => {
+  const getAllProducts = async () => {
     const token = localStorage.getItem("@TOKEN");
     if(token){
       const response = await api.get("/products", {
@@ -39,7 +39,7 @@ export const UserProvider = ({children}: iChildren) => {
     }
   };
   
-  const myLogin = async (data: iUserLogin) =>{
+  const createUserSession = async (data: iUserLogin) =>{
     try {
     const response = await api.post("/login",data)
     const { accessToken, user} = response.data;
@@ -48,7 +48,7 @@ export const UserProvider = ({children}: iChildren) => {
     window.localStorage.setItem("@TOKEN", accessToken);
     window.localStorage.setItem("@USER", JSON.stringify(user));
     toast.success("Login efetuado com sucesso!");
-    getApiProducts()
+    getAllProducts()
     navigate("/dashboard")
     
     } catch (error) {
@@ -58,11 +58,11 @@ export const UserProvider = ({children}: iChildren) => {
   }
 
   useEffect(()=>{
-    getApiProducts()
+    getAllProducts()
   },[])
 
   return (
-    <UserContext.Provider value={{ myRegister, myLogin, usersOn, products}}>
+    <UserContext.Provider value={{ userRegister, createUserSession, usersOn, products}}>
         {children}
     </UserContext.Provider>
   )

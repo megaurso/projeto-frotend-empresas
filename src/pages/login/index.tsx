@@ -13,7 +13,7 @@ import { UserContext } from "../../contexts/UserContext"
 
 export const Login = () => {
 
-    const { myLogin }= useContext(UserContext)
+    const { createUserSession }= useContext(UserContext)
 
     const {
         register,
@@ -27,7 +27,7 @@ export const Login = () => {
     <MainLoginContainer>
         <Logo/>
         <section>
-            <form noValidate onSubmit={handleSubmit(myLogin)}>
+            <form noValidate onSubmit={handleSubmit(createUserSession)}>
                 <h3>Login</h3>
                 <div>
                     <label htmlFor="email">Email</label>

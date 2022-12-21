@@ -141,6 +141,16 @@ export const MainLoginContainer = styled.main`
     }
   }
 
+  
+  @media (min-width: 600px){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      form{
+        width: 100%;
+      }
+  }
+
   @media (min-width: 1024px) {
     padding-left: 10%;
     width: 100vw;

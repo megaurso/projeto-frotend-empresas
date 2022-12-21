@@ -11,7 +11,7 @@ import { formSchemaRegister } from "../../lib/yup"
 import { iUserRegister } from "../../interface"
 
 export const Register = () => {
-    const { myRegister } = useContext(UserContext)
+    const { userRegister } = useContext(UserContext)
     
     const {
         register,
@@ -25,7 +25,7 @@ export const Register = () => {
       <MainRegister>
         <Logo/>
         <div>
-            <form noValidate onSubmit={handleSubmit(myRegister)}>
+            <form noValidate onSubmit={handleSubmit(userRegister)}>
                 <div>
                     <h2>Cadastro</h2>
                     <Link to={"/"}>Retornar para o login</Link>
